@@ -1,3 +1,12 @@
+// set quantity stock
+let quantityStock = [
+    ["Bouqet 1", 5],
+    ["Bouqet 2", 2],
+    ["Bouqet 3", 1],
+    ["Bouqet 4", 3],
+    ["Bouqet 5", 4],   
+]
+
 
 function documentReady(){
     // add to cart buttons - addEventListener
@@ -118,19 +127,28 @@ function updateTotal() {
 };
 
 function plusQtt(e) {
-   let itemPlus = e.target.parentElement; // take the <div> above
-   let qtt = Number(itemPlus.querySelector('.cart-quantity').innerHTML); // from the <div> now take the quantity
-   itemPlus.querySelector('.cart-quantity').innerHTML = qtt + 1;
-//    console.log(qtt);
+    let itemPlus = e.target.parentElement; // take the <div> above
+    let qtt = Number(itemPlus.querySelector('.cart-quantity').innerHTML); // from the <div> now take the quantity
+    itemPlus.querySelector('.cart-quantity').innerHTML = qtt + 1;
+    // console.log(qtt);
    
-//    let y = Number(itemPlus.querySelector(".stockQttSum").innerHTML);
-//    console.log(y);
-//    if (qtt > y){
-//        alert("we don't have so many items in stock");
-//    } else if (qtt <= itemPlus.querySelector(".stockQttSum").innerHTML) {
-//     dateTotal();
-//     updateQtt();
-// }
+    // check Quantity in stock
+    let cartItemTitle = e.target.parentElement.parentElement.querySelector(".cart-item-title").innerText;  // title of current cart row
+
+    let qttCurrentArray = document.getElementById("shopItems").querySelectorAll(".stockQttSum"); // create array of all stock quantities
+
+    //  ? not properly working yet
+    // for all my qttCurrentArray Elements...
+    // for (let i = 0; i < cartItemTitle.length; i++){
+    //     if (cartItemTitle === quantityStock[i]) {
+    //         if (qtt > qttCurrentArray[i]){
+    //             alert("we don't have so many items in stock");
+    //         } else if (qtt <= qttCurrentArray[i]) {
+    //             updateTotal();
+    //             updateQtt();
+    //         }
+    //     }
+    // }
 updateTotal();
 updateQtt();
 }
