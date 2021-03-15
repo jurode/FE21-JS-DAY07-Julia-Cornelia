@@ -1,13 +1,33 @@
 
-// add to cart buttons - addEventListener
-let addToCartButtonArray = document.getElementsByClassName("addToCartButton");
-for (let i = 0; i < addToCartButtonArray.length; i++){
-    // declare each button as a variable
-    let addToCartButton = addToCartButtonArray[i];
-    // for this button add Event Listener
-    addToCartButton.addEventListener("click", addItem);
-}
+function documentReady(){
+    // add to cart buttons - addEventListener
+    let addToCartButtonArray = document.getElementsByClassName("addToCartButton");
+    for (let i = 0; i < addToCartButtonArray.length; i++){
+        // declare each button as a variable
+        let addToCartButton = addToCartButtonArray[i];
+        // for this button add Event Listener
+        addToCartButton.addEventListener("click", addItem);
+    }
 
+    let plusBtns = document.getElementsByClassName('plus');
+    for (let i = 0; i < plusBtns.length; i++) {
+        let plusBtn = plusBtns[i];
+        plusBtn.addEventListener("click", plusQtt);
+    }
+
+    let minusBtns = document.getElementsByClassName('minus');
+    for (let i = 0; i < minusBtns.length; i++) {
+        let minusBtn = minusBtns[i];
+        minusBtn.addEventListener("click", minusQtt);
+    }
+
+    let delItemBtns = document.getElementsByClassName('del');
+    for (let i = 0; i < delItemBtns.length; i++) {
+       let delBtn = delItemBtns[i];
+       delBtn.addEventListener("click", delItem);
+    }
+}
+documentReady();
 
 
 function addItem(e){
@@ -22,8 +42,9 @@ function addItem(e){
     let itemPrice = item.querySelector('.card-price').innerText.replace("€", "");
     let itemPicture = item.querySelector(".card-img-top").src;
     rowCreate(itemTitle, itemPrice, itemPicture);
-    
-    console.log(itemTitle, itemPrice, itemPicture);
+    updateTotal();
+    updateQtt();
+    // console.log(itemTitle, itemPrice, itemPicture);
 }
 
 function rowCreate(itemTitle, itemPrice, itemPicture){
@@ -39,7 +60,8 @@ function rowCreate(itemTitle, itemPrice, itemPicture){
             let qtt = Number(cartItemQtt[i].innerHTML);
             cartItemQtt[i].innerHTML = qtt + 1 ;
            // console.log(qtt);
-            updateTotal();        
+            updateTotal();  
+            updateQtt();      
             return ;//it will stop our script
         }
 }
@@ -62,8 +84,8 @@ function rowCreate(itemTitle, itemPrice, itemPicture){
     </div>`;
     let cart = document.getElementById('cart-items');
     cart.innerHTML += item;
-    // documentReady();
-    console.log(item);
+    documentReady();
+    // console.log(item);
 }
 
 // adding the prices of the items in the shopping cart and updating the total price
@@ -75,7 +97,7 @@ function updateTotal() {
         let cartRow = cartRows[i];
         let price = parseFloat(cartRow.getElementsByClassName( "cart-price")[0].innerText.replace("€", ""));
 
- //we only need the first one
+        //we only need the first one
         let qtt = Number(cartRow.getElementsByClassName("cart-quantity")[0].innerText);
         console.log(price, qtt);
         total += (price * qtt);
@@ -84,5 +106,68 @@ function updateTotal() {
     total = total.toFixed(2);//toFixed() will help rounding the number to 2 decimals
     let totalElement = document.getElementById("total-price").querySelector( '#total-price-sum');
     // console.log(total);
+    if (total >= 100){
+        total = total * 0.9;
+        let discount = document.getElementById("discount");
+        discount.innerHTML = "-10% discount";
+    } else if (total < 100){
+        let discount = document.getElementById("discount");
+        discount.innerHTML = "";
+    }
     totalElement.innerHTML = "€" + total;
+};
+
+function plusQtt(e) {
+   let itemPlus = e.target.parentElement; // take the <div> above
+   let qtt = Number(itemPlus.querySelector('.cart-quantity').innerHTML); // from the <div> now take the quantity
+   itemPlus.querySelector('.cart-quantity').innerHTML = qtt + 1;
+//    console.log(qtt);
+   
+//    let y = Number(itemPlus.querySelector(".stockQttSum").innerHTML);
+//    console.log(y);
+//    if (qtt > y){
+//        alert("we don't have so many items in stock");
+//    } else if (qtt <= itemPlus.querySelector(".stockQttSum").innerHTML) {
+//     dateTotal();
+//     updateQtt();
+// }
+updateTotal();
+updateQtt();
+}
+
+function minusQtt(e) {
+    let itemMinus = e.target.parentElement.parentElement;
+    let qtt = Number(itemMinus.querySelector('.cart-quantity').innerHTML);
+    if (qtt == 1) {
+       console.log("There shouldn't be 0 products in the cart");
+       delItem(e);
+    } else {
+       itemMinus.querySelector('.cart-quantity').innerHTML = qtt - 1;
+       console.log(qtt);
+       updateTotal();
+       updateQtt();
+    }
+}
+ 
+function delItem(e) {
+    let delBtnAction = e.target.parentElement.parentElement.remove();  
+    updateTotal();
+    updateQtt();
+}
+
+// adding the quantity of the items in the shopping cart and updating the total qtt
+function updateQtt() {
+    let cart = document.getElementById("cart-items");
+    let cartRows = cart.getElementsByClassName("cart-row");
+    let total = 0; // it will be calculated from zero each time it is updated
+    for (let i = 0; i < cartRows.length; i++) {
+        let cartRow = cartRows[i];
+        //we only need the first one
+        let qtt = Number(cartRow.getElementsByClassName("cart-quantity")[0].innerText);
+        total += qtt;
+    }
+    total = total.toFixed(0);//toFixed() will help rounding the number to 2 decimals
+    let totalElement = document.getElementById("total-qtt").querySelector('#total-qtt-sum');
+    // console.log(total);
+    totalElement.innerHTML = total;
 };
