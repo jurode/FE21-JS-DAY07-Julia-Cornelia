@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower shop</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <style>
+
+        header li {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- You will create a shopping cart today for a florist that sells a variety of flowers.
+    Additionally to the standard features(add to cart, change quantity, remove from cart and showing total sum), you should implement the following:
+        - showing the amount of items in the cart
+        - giving and displaying a discount if the amount is over a certain amount (e.g. 10% on EUR 100,- purchase)
+        - checking the stock price(e.g. if the user wants to purchase 5 roses and there are only 4 in stock, there should be a message saying only 4 are still in stock) -->
+    
+        <header class="bg-light text-center">
+            <a href="index.html">Home</a>
+            <a href="">About us</a>
+            <a href="">Delivery</a>
+        </header>
+
+
+        <main class="">
+            <h1 class="mt-5 h1">Welcome to our flower shop</h1>
+
+            <!-- Shop Items -->
+            <div id="shopItems" class="d-flex flex-wrap">
+
+                <div class="card" style="width: 18rem;">
+                    <img src="img/155456132.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Bouqet 1</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-price">€35.0</p>
+                      <button class="btn btn-primary addToCartButton">Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img src="img/Download.jfif" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Bouqet 2</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-price">€35.0</p>
+                      <button class="btn btn-primary addToCartButton">Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img src="img/images.jfif" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Bouqet 3</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-price">€35.0</p>
+                      <button class="btn btn-primary addToCartButton">Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img src="img/natural-3059535_960_720.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Bouqet 4</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-price">€35.0</p>
+                      <button class="btn btn-primary addToCartButton">Add to cart</button>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img src="img/vase-2268019_960_720.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Bouqet 5</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-price">€35.0</p>
+                      <button class="btn btn-primary addToCartButton">Add to cart</button>
+                    </div>
+                </div>
+
+            </div> <!-- end #shopItems-->
+
+            <!-- Cart Section -->
+            <div id="cart" class="container">
+                <h2>Cart</h2>
+
+                <div class="cart-header border-bottom row">
+                    <span class="col-6">ITEM</span>
+                    <span class="col-3">PRICE</span>
+                    <span class="col-3">QUANTITY</span>
+                </div>
+
+                <div id="cart-items">
+                    <!-- empty right now -->
+                </div>
+
+                <div id="total-price" class="text-end fw-bold">
+                    <p>Total</p>
+                    <span id="total-price-sum">€0.00</span>
+                </div>
+
+            </div>
+
+
+        </main>
+
+    <script src="script.js"></script>
+
+    <!-- ! Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>
